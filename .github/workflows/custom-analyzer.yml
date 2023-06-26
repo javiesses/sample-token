@@ -1,8 +1,6 @@
 name: Slither Analysis
 
 on:
-  push:
-    branches: [ master ]
   pull_request:
 
 jobs:
@@ -16,7 +14,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Run Custom Action
-      uses: javiesses/custom-github-action@v3
+      uses: javiesses/custom-github-action@v4
       id: custom
       
     - name: Send mail
@@ -29,10 +27,4 @@ jobs:
         subject: New commit on main branch
         to: ${{secrets.MAIL_TO}}
         from: Your Olympix Assistant <${{secrets.MAIL_SENDER_USERNAME}}>
-        body: |
-          Hi,
-          A new commit has been pushed to the main branch.
-          Here is the summary of the contracts analyzed:
-          ${{ steps.custom.outputs.lineCounts }}
-          Regards,
-          Your Olympix Assistant
+        body: ${{ steps.linecount.outputs.html }}
