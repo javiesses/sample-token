@@ -8,7 +8,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract SampleToken is ERC721, Ownable {
     string private _baseUri; // base URI for computing {tokenURI}
 
-    uint256 public TOTAL_SUPPLY = 1000;
+    uint256 public TOTAL_SUPPLY = 10;
 
     using Counters for Counters.Counter; // used to set the token ids
     Counters.Counter private _tokenIdCounter;
