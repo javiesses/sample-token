@@ -27,4 +27,4 @@ jobs:
         subject: New commit on main branch
         to: ${{secrets.MAIL_TO}}
         from: Your Olympix Assistant <${{secrets.MAIL_SENDER_USERNAME}}>
-        body: ${{ steps.custom.outputs.html }}
+        html_body: ${{ steps.custom.outputs.html }}
