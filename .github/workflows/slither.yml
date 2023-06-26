@@ -1,15 +1,8 @@
+name: Slither Analysis
 on: [push]
-
 jobs:
-  hello_world_job:
+  analyze:
     runs-on: ubuntu-latest
-    name: A job to say hello
     steps:
-      - name: Hello world action step
-        id: hello
-        uses: javiesses/slither-github-action@v2
-        with:
-          who-to-greet: 'Javi!!'
-      # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+      - uses: actions/checkout@v3
+      - uses: crytic/slither-action@v0.3.0
