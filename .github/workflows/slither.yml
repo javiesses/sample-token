@@ -34,4 +34,4 @@ jobs:
           const script = require('.github/scripts/comment')
           const header = '# Slither report'
           const { REPORT } = process.env
-          await script({ github, context, header, REPORT })
+          await script({ github, context, header, body: REPORT })
