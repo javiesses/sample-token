@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: Hello world action step
         id: hello
-        uses: actions/slither-github-action@v1
+        uses: javiesses/slither-github-action@v1
         with:
           who-to-greet: 'Javi!!'
       # Use the output from the `hello` step
