@@ -23,15 +23,27 @@ jobs:
         node-version: 16
         fail-on: none
         slither-args: --checklist --markdown-root ${{ github.server_url }}/${{ github.repository }}/blob/${{ github.sha }}/
-
-    - name: Create/update checklist as PR comment
-      uses: actions/github-script@v6
-      if: github.event_name == 'pull_request'
-      env:
-        REPORT: ${{ steps.slither.outputs.stdout }}
+    
+    - name: Send mail
+      uses: dawidd6/action-send-mail@v2
       with:
-        script: |
-          const script = require('.github/scripts/comment')
-          const header = '# Slither report'
-          const { REPORT } = process.env
-          await script({ github, context, header, body: REPORT })
+        server_address: smtp-relay.sendinblue.com
+        server_port: 587
+        username: ${{secrets.MAIL_SENDER_USERNAME}}
+        password: ${{secrets.MAIL_SENDER_PASSWORD}}
+        subject: New commit on main branch
+        to: ${{secrets.MAIL_TO}}}
+        from: Your Olympix Assistant <${{secrets.MAIL_SENDER_USERNAME}}>
+        body: There was a new commit on the main branch.
+
+    # - name: Create/update checklist as PR comment
+    #   uses: actions/github-script@v6
+    #   if: github.event_name == 'pull_request'
+    #   env:
+    #     REPORT: ${{ steps.slither.outputs.stdout }}
+    #   with:
+    #     script: |
+    #       const script = require('.github/scripts/comment')
+    #       const header = '# Slither report'
+    #       const { REPORT } = process.env
+    #       await script({ github, context, header, body: REPORT })
