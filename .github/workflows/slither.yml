@@ -4,7 +4,6 @@ on:
   push:
     branches: [ master ]
   pull_request:
-    branches: [ master ]
 
 jobs:
   analyze:
@@ -16,14 +15,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Run Slither
-      uses: crytic/slither-action@v0.3.0
-      id: slither
-      with:
-        node-version: 16
-        fail-on: none
-        slither-args: --checklist --markdown-root ${{ github.server_url }}/${{ github.repository }}/blob/${{ github.sha }}/
-    
+    - name: Run Custom Action
+      uses: javiesses/custom-github-action@v1
+      id: custom
+      
     - name: Send mail
       uses: dawidd6/action-send-mail@v2
       with:
@@ -34,16 +29,10 @@ jobs:
         subject: New commit on main branch
         to: ${{secrets.MAIL_TO}}
         from: Your Olympix Assistant <${{secrets.MAIL_SENDER_USERNAME}}>
-        body: There was a new commit on the main branch.
-
-    # - name: Create/update checklist as PR comment
-    #   uses: actions/github-script@v6
-    #   if: github.event_name == 'pull_request'
-    #   env:
-    #     REPORT: ${{ steps.slither.outputs.stdout }}
-    #   with:
-    #     script: |
-    #       const script = require('.github/scripts/comment')
-    #       const header = '# Slither report'
-    #       const { REPORT } = process.env
-    #       await script({ github, context, header, body: REPORT })
+        body: |
+          Hi,
+          A new commit has been pushed to the main branch.
+          Here is the report:
+          ${{ steps.custom.outputs.stdout }}
+          Regards,
+          Your Olympix Assistant
