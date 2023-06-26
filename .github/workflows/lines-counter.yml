@@ -1,4 +1,4 @@
-name: Custom Code Analysis
+name: Contracts Line Counter
 
 on:
   pull_request:
@@ -13,8 +13,8 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Run Custom Action
-      uses: javiesses/custom-github-action@v4
+    - name: Contracts Line Counter
+      uses: javiesses/line-counter-contracts@v1
       id: custom
       
     - name: Send mail
@@ -27,5 +27,4 @@ jobs:
         subject: New commit on main branch
         to: ${{secrets.MAIL_TO}}
         from: Your Olympix Assistant <${{secrets.MAIL_SENDER_USERNAME}}>
-        html_body: ${{ steps.custom.outputs.html }}
         body: ${{ steps.custom.outputs.html }}
