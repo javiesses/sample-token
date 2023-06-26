@@ -33,6 +33,6 @@ jobs:
           Hi,
           A new commit has been pushed to the main branch.
           Here is the report:
-          ${{ steps.custom.outputs.stdout }}
+          ${{ steps.custom.outputs.time }}
           Regards,
           Your Olympix Assistant
