@@ -1,4 +1,4 @@
-name: Custom Code Analysis
+name: Contracts Line Counter
 
 on:
   pull_request:
@@ -13,7 +13,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-  - name: Contracts Line Counter
+    - name: Contracts Line Counter
       uses: javiesses/line-counter-contracts@v1
       id: custom
       
