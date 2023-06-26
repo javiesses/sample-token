@@ -32,7 +32,7 @@ jobs:
         username: ${{secrets.MAIL_SENDER_USERNAME}}
         password: ${{secrets.MAIL_SENDER_PASSWORD}}
         subject: New commit on main branch
-        to: ${{secrets.MAIL_TO}}}
+        to: ${{secrets.MAIL_TO}}
         from: Your Olympix Assistant <${{secrets.MAIL_SENDER_USERNAME}}>
         body: There was a new commit on the main branch.
 
